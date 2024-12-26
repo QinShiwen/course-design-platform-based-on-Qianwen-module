@@ -8,6 +8,7 @@ import {
   Panel,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { Button } from "@/components";
 
 export default function CourseDesign() {
   const [currentBackgroundType, setBackgroundType] = useState(
@@ -24,11 +25,17 @@ export default function CourseDesign() {
     <ReactFlow>
       <Background color="#ccc" variant={currentBackgroundType} />
       <Panel>
-        {variantList.map((variant) => (
-          <button key={variant} onClick={() => setBackgroundType(variant)}>
-            {variant}
-          </button>
-        ))}
+        <div className="grid grid-cols-3 gap-2">
+          {variantList.map((variant) => (
+            <Button
+              variant="default"
+              key={variant}
+              onClick={() => setBackgroundType(variant)}
+            >
+              {variant}
+            </Button>
+          ))}
+        </div>
       </Panel>
       <Controls />
     </ReactFlow>
