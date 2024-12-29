@@ -1,26 +1,23 @@
+"use client";
 import React from "react";
 import { UserSidebar } from "@/components";
+import { USER_HOMEPAGE_EN, USER_HOMEPAGE_CN } from "@/locales";
+import { useLanguage, UserLanguageType } from "@/context";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const UserHomepageLayout: React.FC<LayoutProps> = ({ children }) => {
+  const { language } = useLanguage();
+  const pageText =
+    language === UserLanguageType.ENG ? USER_HOMEPAGE_EN : USER_HOMEPAGE_CN;
+
   const sidebarItems = [
     {
-      title: "Dashboard",
+      title: pageText.MY_COURSES,
       icon: <i className="fas fa-tachometer-alt"></i>,
-      url: "/user/dashboard",
-    },
-    {
-      title: "Profile",
-      icon: <i className="fas fa-user"></i>,
-      url: "/user/profile",
-    },
-    {
-      title: "Settings",
-      icon: <i className="fas fa-cog"></i>,
-      url: "/user/settings",
+      url: "/user-homepage/courses",
     },
   ];
   return (
