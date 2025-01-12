@@ -19,13 +19,15 @@ type SidebarItem = {
 type UserSidebarProps = {
   header?: React.ReactNode;
   footer?: React.ReactNode;
+  activePage: number;
+  handleActivatePage: (pageIndex: number) => void;
   sidebarItems: SidebarItem[];
 };
 
 export const UserSidebar: React.FC<UserSidebarProps> = (
   props: UserSidebarProps
 ) => {
-  const { sidebarItems } = props;
+  const { sidebarItems, handleActivatePage } = props;
   return (
     <SidebarProvider defaultOpen>
       <SidebarUI>
@@ -35,7 +37,12 @@ export const UserSidebar: React.FC<UserSidebarProps> = (
               {sidebarItems.map((item, index) => {
                 const { title, icon } = item;
                 return (
-                  <SidebarMenu key={index}>
+                  <SidebarMenu
+                    key={index}
+                    onClick={() => {
+                      handleActivatePage(index);
+                    }}
+                  >
                     <SidebarMenuButton asChild>
                       <span>
                         {icon} <span>{title}</span>
